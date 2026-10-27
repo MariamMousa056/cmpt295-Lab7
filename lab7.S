@@ -34,6 +34,41 @@ randint :
     ret
 
 fill_array: 
+    push %r12
+    push %r13
+    push %r14
+
+    # well use r12 as our array pointer
+    mov %rdi, %r12
+    # well use r13 to save our n
+    mov %rsi, %r13 
+    # well use r14 to save our i
+    mov $0, %r14
+fill_loop: 
+    # first well compare i with n 
+    cmp %r13, %r14
+    # well jump when i >= n
+    jge fill_done
+
+    call randint
+    # ^ now we have a random number in rax, we only want the lower 8 bits
+    and $0xff, %rax
+    sub $128, %rax
+
+    # array[i] = rax
+    # address = r12 + r14 * 8 (because each element is 8 bytes)
+    mov %rax, (%r12, %r14,8)
+
+    # incrementing our counter i 
+    add $1, %r14
+    # repeating 
+    jmp fill_loop
+fill_done: 
+    pop %r14
+    pop %r13
+    pop %r12
+    ret
+    
 dot: 
 dot_struct: 
     mov $0, %rax
