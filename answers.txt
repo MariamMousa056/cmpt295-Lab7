@@ -1,0 +1,2 @@
+Lab answers : 
+I used the command gcc -Wall -g lab7.S test.c -o Lab7 && ./Lab7
