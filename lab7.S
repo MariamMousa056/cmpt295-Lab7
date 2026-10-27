@@ -70,6 +70,30 @@ fill_done:
     ret
     
 dot: 
+    # rax will hold our sum, which starts at 0
+    mov $0, %rax
+    # rcx will be our i which also starts at 0
+    mov $0, %rcx
+dot_loop: 
+    # compare i with n
+    cmp    %rdx, %rcx         
+    jge    dot_done            
+
+    # arr1[i] will be in r8
+    mov    (%rdi,%rcx,8), %r8  
+
+    # doing the multiplication array1[i] * array2[i]
+    imul   (%rsi,%rcx,8), %r8 
+    # sum = sum + r8
+    add    %r8, %rax           
+
+    # incrementing i 
+    add    $1, %rcx    
+    # going to the top of the loop again         
+    jmp    dot_loop
+dot_done:
+    ret         
+                  
 dot_struct: 
     mov $0, %rax
     ret
