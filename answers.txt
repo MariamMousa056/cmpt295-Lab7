@@ -1,2 +1,9 @@
 Lab answers : 
-I used the command gcc -Wall -g lab7.S test.c -o Lab7 && ./Lab7
+Q1 : 
+- I used the command "gcc -Wall -g lab7.S test.c -o Lab7 && ./Lab7 to test my functions (without testing the different timing)"
+- and used the command "gcc -Wall -O3 lab7.S timing.c lab7c.c -o timing && ./timing" to test the timings of my dot functions 
+
+Q2 : 
+- I compiled the code with -o3, and all four implementations ran at nearly the same speed!
+roughly between 0.76-0.81 ns/element.
+

@@ -93,7 +93,29 @@ dot_loop:
     jmp    dot_loop
 dot_done:
     ret         
-                  
-dot_struct: 
-    mov $0, %rax
-    ret
+
+dot_struct:
+    # rax will hold our sum and will start at 0
+    mov    $0, %rax            # rax = sum = 0
+    # rcx will be pair counter and also starts at 0
+    mov    $0, %rcx            # rcx = i = 0 (just counts pairs)
+
+dot_struct_loop:
+    # comparing i with n 
+    cmp    %rsi, %rcx 
+    # jumping if i >= n        
+    jge    dot_struct_done   
+
+
+    mov    0(%rdi), %r8        
+    imul   8(%rdi), %r8       
+    add    %r8, %rax          
+
+    # moving our pointer to the next pair (which is 16 bytes away)
+    add    $16, %rdi    
+    # incrementing i       
+    add    $1, %rcx        
+    # going to the top of the loop    
+    jmp    dot_struct_loop
+dot_struct_done:
+    ret                       
